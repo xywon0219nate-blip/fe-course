@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습2. 로그인 폼</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        figure{
+            border: 3px solid gray ; background-color: gray;
+        }
+
+        img {
+            display:block;
+            margin: auto;
+        }
+
+        button {
+            display: block;
+            margin: auto;
+            border-radius: 4px;
+            background-color: yellow;
+        }
+
+        article {
+            display: flex;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div><!--왼 위 상단 왕관-->
+            <i class="fa-solid fa-crown"></i>
+        </div>
+
+        <div> <!--프로필 이미지 위치-->
+            <img src="../images/ex.png" alt="프로필 이미지">
+        </div>
+
+
+    </header>
+
+    <main>
+        <section>
+            <div><!--사용자 ID-->
+                <figure>
+                    <i class="fa-solid fa-envelope-open"></i>
+                    <input type="text" placeholder="Username">
+                </figure>
+            </div>
+
+            <div><!--사용자 password-->
+                <figure>
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="text" placeholder="Password">
+                </figure>
+            </div>
+        </section>
+
+        <article><!--아이디 기억하거나 비번 까먹음-->
+            <div>
+                <input type="radio" name="remember"> Rememmber me
+            </div>
+
+            <div>
+                <input type="radio" name="forgot"> Forgot your password ?
+            </div>
+        </article>
+
+        <div>
+            <button type="submit">Login</button>
+        </div>
+
+    </main>
+    
+    <footer>
+
+    </footer>
+</body>
+</html>

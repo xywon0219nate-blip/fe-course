@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>image gallary</title>
+
+    <style> /*스타일에 넣으면 길기 때문에 추후 .css로 변경하며 파일을 따로 보관함*/
+        ul ,section{
+            /* @@ {} 모든 ul,img 등을 선택*/
+            /*property: value; */
+            list-style-type: none; /*ul 스타일로 나와있는 검은 점을 삭제하는 방법*/
+            display: flex; /* ul 내부에 있는 블록들은 li의 위치를 옆으로 나오도록 하는 법*/
+            gap: 10px; /* ul 내부의 행과 열 사이의 거리를 벌리게 하는 법*/
+        }
+        img {
+            width: 200px;
+        }
+        li, article, figure, figcaption{
+            /*li와 article 모두에게 같은 효과를 적용*/
+            border: 1px solid lightslategray; 
+            /*주변의 박스 선을 생성: 선의_두께px 실선 색상;*/
+        }
+        div {
+            text-align: center;
+            /*글씨 정렬: 중앙; */
+            padding: 10px;
+            /*padding-> 해당하는 범위의 상하좌우에 모두 @px를 부여함*/
+            /*padding-bottom: 50px; 아래의 부분만 50px 추가 부여*/
+        }
+        figcaption {
+            text-align: center; 
+        }
+
+    /*   
+        section {
+            //figure과 figcaption에 원래 자체적으로 공간을 가지고 있기 때문에 박스가 더 크게 나옴
+            display: flex;
+            gap: 20px;
+        }
+    */
+
+    </style>
+</head>
+
+<body>
+    <h1>image gallary : list</h1>
+    <ul>
+        <li>
+            <img src="https://www.w3schools.com/css/img_5terre.jpg" alt="해안가">
+            <div>Cinque Terre</div>
+        </li>
+        <li>
+            <img src="https://www.w3schools.com/css/img_forest.jpg" alt="숲">
+            <div>Green Forest</div>
+        </li>
+        <li>
+            <img src="https://www.w3schools.com/css/img_lights.jpg" alt="오로라">
+            <div>Northern Lights</div>
+        </li>
+        <li>
+            <img src="https://www.w3schools.com/css/img_mountains.jpg" alt="산">
+            <div> Mountains</div>
+        </li>
+    </ul>
+
+    <hr>
+
+    <h1>image gallary : semantic</h1>
+    <section> <!--주제가 같은 콘텐츠를 묶음-->
+        <article> <!--블록 레벨 / 독립적으로 완결이 되는 부분, 따로 떼어내도 의미가 통하는 컨텐츠-->
+            <figure> 
+                <!--이미지 등의 연관된 콘텐츠를 감사는 태그-->
+                <!--이미지와 설명을 함께 묶는 태그-->
+                <img src="https://www.w3schools.com/css/img_5terre.jpg" alt="해안가">
+                <figcaption> <!--figure 태그의 대한 설명-->
+                    <p>Cinque Terre</p>
+                </figcaption>
+            </figure>
+        </article>
+        <article> <!--블록 레벨-->
+            <figure>
+                <img src="https://www.w3schools.com/css/img_5terre.jpg" alt="해안가">
+                <figcaption>
+                    <p>Cinque Terre</p>
+                </figcaption>
+            </figure>
+        </article>
+    </section>
+</body>
+
+</html>
