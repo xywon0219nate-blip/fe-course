@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Selector</title>
+    <meta name="description" content="Universal Selector">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /*공통 프로퍼티를 변수로 정의*/
+            --color-main: lightskyblue;
+            --color-font: white;
+        }
+
+        /* *(아스타 기호): 전체 영역에 공통적인 속성을 정의하는 경우*/
+        * {
+            background-color: var(--color-main);
+            /* background-color: lightskyblue; */
+
+            font-family: "Open Sans", sans-serif;
+            /*sans-serif의 경우 l처럼 영어의 끝부분이 말려가는 것이 없도록 해줌*/
+
+            margin: 0;
+            /* margin을 이용하여 블록레벨이 원래 보여하던 여백을 0으로 함. (확인을 원한다면 margin을 잠시 주석처리하면 원래 있던 여백을 확인할 수 있음*/
+        } 
+
+        /* *와 순서가 바뀌어도 h1이 우선이 됨*/
+        h1,h3 {
+            color: var(--color-font);
+            background-color: lightgreen;
+        }
+
+        /*상단의 h1이 먼저 적용이 된 후 이후에 색이 tomato로 변경됨*/
+        h1 ,div{
+            background-color: tomato;
+        }
+        
+        p {
+            font-family: 'courier New';
+            background-color: lightpink;
+        }
+    </style>
+</head>
+<body>
+    <h1>Universal(All) selector</h1>
+    <div>
+        <h3>Sub title</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et facere, officia rem modi aspernatur accusantium eveniet corporis nulla maiores molestias ipsum consequuntur autem, sequi commodi ducimus, dolore culpa atque velit.</p>
+    </div>
+</body>
+</html>

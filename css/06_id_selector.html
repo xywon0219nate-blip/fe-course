@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>id_selector</title>
+    <meta name="description" content="id_selector">
+    <style>
+        * {
+
+            margin: 0;
+        }
+
+        /*id의 원칙은 1회만 사용하는 것이기에 중복해서 사용X를 권장. 만약 사용하고 싶다면 class를 사용할 것.*/
+        #selector1 {
+            color: lightcoral;
+            width: 300px;
+            height: 400px;
+            background-color: lightgreen;
+            /*margin: 0;*/
+        }
+        #selector2 {
+            color: lightgreen;
+            background-color: lightyellow;
+            /*margin: 0;*/
+        }
+        #selector3{
+            color: lightblue;
+            background-color: lightyellow;
+            /*margin: 0;*/
+        }
+    </style>
+</head>
+<body>
+    <h1 id="selector1">id_selector #1</h1>
+    <h1 id="selector2">id_selector #2</h1>
+    <h1 id="selector3">id_selector #3</h1>
+    <p></p>
+</body>
+</html>

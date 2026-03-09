@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="seo_내용 추가됨">
     <title>웹 개발 교육 상담 문의</title>
 </head>
 <body>
@@ -22,24 +23,24 @@
 
                     <article> <!--1. 이름-->
                         <label for="name">이름 <sup>*</sup> </label>
-                        <input type="text" name="name" placeholder="이름을 입력하세요">
+                        <input type="text" name="name" id="name" placeholder="이름을 입력하세요">
                         <p>실명을 입력해 주세요.</p>
                     </article>
 
                     <article> <!--2. 이메일-->
                         <label for="email">이메일 <sup>*</sup> </label>
-                        <input type="text" name="email" placeholder="example@email.com">
+                        <input type="text" name="email" placeholder="example@email.com" id="email">
                         <p>답변을 받을 이메일 주소를 입력하세요.</p>
                     </article>
 
                     <article> <!--3. 연락처-->
                         <label for="phone">연락처</label>
-                        <input type="text" name="phone" placeholder="010-0000-0000">
+                        <input type="text" name="phone" placeholder="010-0000-0000" id="phone">
                     </article>
 
                     <article> <!--4. 관심과정-->
                         <label for="course">관심과정</label>
-                        <select name="course">
+                        <select name="course" id="course">
                             <option value="선택">선택하세요</option>
                             <option value="html_css">HTML/CSS 기초</option>
                             <option value="JavaScript">자바 스크립트 입문</option>
@@ -50,13 +51,13 @@
 
                      <article> <!--5.문의 내용-->
                         <label for="message">문의 내용</label>
-                        <textarea name="message" placeholder="궁금한 내용을 자세히 입력해 주세요."></textarea>
+                        <textarea name="message" placeholder="궁금한 내용을 자세히 입력해 주세요." id="message"></textarea>
                         <p>예: 수업 일정, 수강 대상, 비용, 프로젝트 중심 수업 여부 등</p>
                     </article>
                     
                     <article> <!--6.개인정보 수집 및 동의-->
-                        <input type="checkbox" name="agree">
-                        <label for="agree">개인정보 수집 및 이용에 동의합니다.<sup>*</sup> </label>
+                        <label for="agree" id="agree">개인정보 수집 및 이용에 동의합니다.<sup>*</sup> </label>
+                        <input type="checkbox" name="agree" id="agree">
                     </article>
 
                     <article>

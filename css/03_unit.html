@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css_unit</title>
+    <meta name="description" content="css_unit">
+    <style>
+        h1{
+            width: 50%; /*보여지는 크기에 따라 배경의 크기가 상대적으로 변경됨*/
+            background-color: cornflowerblue;
+        }
+
+        /*h2로 그냥 이용할 경우 두 가지 모두가 함께 적용이 되기 때문에 id를 이용하여 각각 다르게 스타일을 적용*/
+        #pixel {    
+            width: 500px;
+        background-color: yellow;
+        }
+
+        #percent {
+            width: 30%;
+            background-color: tomato;
+        }
+        /*큰 레이아웃을 잡을 때는 percent를 주는 것이 좋음(같이 커지고 줄어들기 때문)*/
+
+        #pixel_h5 {
+            font-size: 1.5em; /*현재 보여주는 크기*1.5배*/ 
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <h1>css_unit</h1>
+    <h2 id="pixel">pixel(픽셀)</h2>
+    <div>
+        <h5 id="pixel_h5">css_pixel</h5>
+        <p id="pixel">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia molestias veniam alias, sit dolor reprehenderit, voluptates explicabo inventore fuga, officia ad id? Perferendis quibusdam enim id dolor quod, atque nesciunt?</p>
+    </div>
+
+    <h2 id="percent">percent(%)</h2>
+    <div>
+        <h5>css_percent</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente eveniet qui necessitatibus quia illum similique repellat consequuntur quas, sunt deserunt vitae odio molestiae sit voluptates nemo consectetur, eum delectus asperiores.</p>
+    </div>
+
+</body>
+</html>
