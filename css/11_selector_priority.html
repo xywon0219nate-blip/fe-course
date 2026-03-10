@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="description" content="Selector Priority">
+    <style>
+        /* 뒤로 갈수록 단계가 더 높음
+        all(*) > element(tag) > class,pseudo,attribute > id > inline-style > !important
+        */
+
+        * { background-color: silver}
+        h1 { background-color: aquamarine;}
+        div {background-color: tomato;}
+        p { background-color: yellow;}
+        #p1 { color: red;}
+        .p2 { color: green !important;} /*!important를 작성하면 결국 green이 가장 우선이 됨*/
+
+    </style>
+</head>
+
+<body>
+    <h1>Selector Priority</h1>
+    <div>
+        <!--inline이 가장 높은 단계이기에 결국은 blue가 적용됨-->
+        <p id="p1" class="p2" style="color: blue;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita odit temporibus asperiores doloribus facilis ratione corporis quisquam? Vel odit dolores quaerat dolore, sit at cumque doloribus adipisci rerum? Libero, veritatis.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita odit temporibus asperiores doloribus facilis ratione corporis quisquam? Vel odit dolores quaerat dolore, sit at cumque doloribus adipisci rerum? Libero, veritatis.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita odit temporibus asperiores doloribus facilis ratione corporis quisquam? Vel odit dolores quaerat dolore, sit at cumque doloribus adipisci rerum? Libero, veritatis.</p>
+    </div>
+</body>
+</html>

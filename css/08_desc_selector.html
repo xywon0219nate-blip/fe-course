@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="description" content="Css_Descendant_Selector">
+
+    <style>
+        /*
+            descnedent selector : 조상[space]자손
+            child selector : 부모[>]자식
+            -> ex) body의 자식은 h1, nav / nav의 자식은 ul...
+            인접한 sibilings selector : 기준태그[+]형제태그
+            모든 sibilings selector : 기준태그[~]형제태그
+        */
+
+        h1 {
+            color: navy;
+            background-color: lightyellow;
+        }
+
+        /*
+        body 내부에서 li를 찾고, 이후 그 li 내부의 ul을 선택
+        body li ul {
+            background-color: lightgreen;
+        }*/
+
+        #main-menu a{
+            color: whitesmoke;
+        }
+        #sub-menu a{
+            background-color: black
+        }
+        body > nav {
+            background-color: olivedrab;
+        }
+        #sub-menu > li > a {
+            text-decoration: none; /*글자 밑 밑줄 삭제*/
+        }
+        li#main-menu + li > a{
+            background-color: pink;
+            text-decoration: none;
+        }
+        h2 + p {
+            background-color: aqua;
+        }
+        h2~p {
+            color: blueviolet;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Descendant_Selector</h1>
+    <nav>
+        <ul >
+            <li id="main-menu">
+                <a href="#">menu1</a>
+                <ul id="sub-menu">
+                    <li><a href="#">sub-menu</a></li>
+                    <li><a href="#">sub-menu</a></li>
+                </ul>
+            </li>
+            <li><a href="#">menu2</a></li>
+            <li><a href="#">menu3</a></li> 
+        </ul>
+    </nav>
+
+    <h2>Sibilings Selector</h2>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo laboriosam delectus facilis quaerat fugit deleniti distinctio maxime obcaecati, consectetur officiis unde blanditiis nam qui laborum dignissimos optio mollitia quas id.</p>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo laboriosam delectus facilis quaerat fugit deleniti distinctio maxime obcaecati, consectetur officiis unde blanditiis nam qui laborum dignissimos optio mollitia quas id.</p>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo laboriosam delectus facilis quaerat fugit deleniti distinctio maxime obcaecati, consectetur officiis unde blanditiis nam qui laborum dignissimos optio mollitia quas id.</p>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>text align</title>
+    <meta name="description" content="text align">
+    <style>
+        p {background-color: antiquewhite;} /*크기에 따라 글시 위치 설정*/
+        span {background-color: yellow;}
+        div {border: 1px solid red;}
+
+        .b-left { 
+            text-align: left; 
+            word-spacing: 50px; 
+            line-height: 50px;
+            text-indent: 0px; /*들여쓰기*/
+            /*margin-left: 100px;*/
+            text-indent: 50px;
+        }
+        .b-center { text-align: center;}
+        .b-right { text-align: right;}
+        .b-justify {
+            width: 300px;
+            background-color: lightblue;
+            text-align: justify;
+            text-transform: uppercase; /*uppercase: 대문자, lowercase: 소문자, capitalize: 단어 시작만 대문자*/
+        }
+
+
+        .i-left { 
+            text-align: left; 
+            word-spacing: 20px;
+            line-height: 20px;
+            border: 1px solid blue;
+            /*text-indent: 50px; inline-level에서는 적용 안됨*/
+        } /*공간이 없기 때문에 위치가 변경이 되지 않음.*/
+        .i-center { text-align: center;}
+        .i-right { text-align: right;}
+
+        .d1 { text-align: left;} 
+        .d2 { text-align: center;}
+        .d3 { text-align: right;}
+
+        img {
+            width: 200px;
+            height: 200px;
+            word-spacing: 50px;
+        }
+        .img-block {
+            text-align: center;
+            /*글자로 취급되기에 justify를 사용하여도 꽉 채워진게 아니라, 적용이 안 됨*/
+        }
+    </style>
+</head>
+<body>
+    <h1>text align</h1>
+    <h3>block-level</h3>
+    <p class="b-left">text align - left</p>
+    <p class="b-right">text align - right</p>
+    <p class="b-center">text align - center</p>
+    <p class="b-justify">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, quae quisquam. Quae debitis totam veritatis quia excepturi saepe, iste quas commodi eum iure facere aliquid obcaecati, numquam delectus amet illum?</p>
+
+    <h3>inline-level</h3>
+    
+    <span class="i-left">text align - left</span>
+    <span class="i-right">text align - right</span>
+    <span class="i-center">text align - center</span>
+    
+    <div class="d1">
+        <span>text align - left</span>
+        <button>click</button>
+        <a href="https://naver.com">naver</a>
+    </div>
+    <div class="d2"><span>text align - right</span></div>
+    <div class="d3"><span>text align - center</span></div>
+
+    <h3>inline-block-level</h3>
+    <div class="img-block">
+        <img src="../images/img01.png" alt="seo">
+        <img src="../images/img01.png" alt="seo">
+        <img src="../images/img01.png" alt="seo">
+        <img src="../images/img01.png" alt="seo">
+        <img src="../images/img01.png" alt="seo">
+    </div>
+</body>
+</html>
