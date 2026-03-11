@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overflow Style</title>
+
+    <!--Overflow란, 글씨가 외부로 넘어간 경우3-->
+    <style>
+        /* p1 : 가로 200, 세로 200, 배경색*/
+        /* p2 : 가로 300, 세로 200, 배경색*/
+        /* p3 : 가로 400, 세로 100, 배경색*/
+        p {
+            margin: 50px;
+        }
+        .p1 {
+            width: 200px;
+            height: 150px;
+            background-color: red;
+            overflow: auto; /*옆이나 아래에 스크롤이 생김*/
+        }
+        .p2 {
+            width: 500px;
+            height: 300px;
+            background-color: orange;
+            overflow-x: hidden;
+        }
+        .p3 {
+            width: 400px;
+            height: 70px;
+            background-color: yellow;
+            overflow: hidden; /*화면 상에서만 잘라서 보여주게 함*/
+        }
+        img {
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Overflow Style</h1>
+    <p class="p1">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis praesentium repellat sed aut quos repudiandae animi, temporibus dicta ea, quibusdam accusantium nemo delectus earum saepe, cum mollitia illo veniam quod!</p>
+    <div class="p2">
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis praesentium repellat sed aut quos repudiandae animi, temporibus dicta ea, quibusdam accusantium nemo delectus earum saepe, cum mollitia illo veniam quod!</p>
+        <img src="../images/Mad_1920774999.jpg" alt="movie">
+    </div>
+    <p class="p3">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis praesentium repellat sed aut quos repudiandae animi, temporibus dicta ea, quibusdam accusantium nemo delectus earum saepe, cum mollitia illo veniam quod!</p>
+</body>
+</html>

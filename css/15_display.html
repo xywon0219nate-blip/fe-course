@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Style</title>
+    <style>
+        /* display 프로퍼티 : block, inline, inline-block level 전환*/
+        div {
+            width: 50%;
+            height: 100px;
+            background-color: aquamarine;
+            display: block; 
+            /*block : width, height 적용 가능!*/
+        }
+        span,button,input {
+            width: 100px;
+            height: 30px;
+            background-color: tomato;
+            display: inline;
+            /*inline : width, height 적용 불가(자리없음),*/
+            /*단, button, input처럼 form의 경우엔 디자인을 위해서 적용이 가능*/
+        }
+        img {
+            width: 200px; height: 200px;
+            display: inline-block;
+            /*inline block: width, height 적용 가능,*/
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Display Style</h1>
+    <hr>
+    <div>block-level</div>
+    <span>inline-level</span>
+    <button>button</button>
+    <input type="text" value="name">
+    <img src="../images/img01.png"alt="inline-block-img">
+</body>
+</html>

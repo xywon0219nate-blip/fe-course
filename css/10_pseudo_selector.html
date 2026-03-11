@@ -8,7 +8,7 @@
 
     <style>
         /*h1 태그 앞에 content에 해당하는 내용을 추가하고 글자색을 초록색으로 정의*/
-        /*h1::before {
+        h1::before {
             content: "h1태그 앞 내용!" ;
             color: green;
         }
@@ -17,7 +17,7 @@
             content: "h1태그 뒤 내용";
             color: skyblue;
         }
-        /*a태그에 마우스를 올린 상태
+        /*a태그에 마우스를 올린 상태*/
         a:hover{text-decoration: none;}
 
         a.naver:hover {color: green;  }
@@ -32,8 +32,8 @@
             background-color: lightblue;
             border: 1px solid lightgray;
         }
-        */
         
+
         /*수열*/
         ul.menus li:first-child, 
         ul.menus li:last-child,
@@ -55,7 +55,7 @@
         table tr:nth-child(odd) {
             background-color: silver;
         }
-        table tr:first-child { 제목도 포함됨
+        table tr:first-child { /*제목도 포함됨*/
             background-color: black;
             color: white;
         }
@@ -73,7 +73,7 @@
     </style>
 </head>
 <body>
-    <!--
+    
     <h1>pseudo_selector</h1>
     <p>
         <a href="https://naver.com" class="naver">네이버</a>
@@ -108,7 +108,7 @@
             </li>
         </ul>
     </form>
-    <hr>-->
+    <hr>
     
     <h1>pseudo_selector - 수열</h1>
         <ul class="menus">
@@ -125,7 +125,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, distinctio cum quibusdam aliquid dolore omnis sunt eligendi blanditiis possimus, repudiandae laudantium. Esse quos, debitis pariatur quod quis ad magni ut!</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, distinctio cum quibusdam aliquid dolore omnis sunt eligendi blanditiis possimus, repudiandae laudantium. Esse quos, debitis pariatur quod quis ad magni ut!</p>
         </div>
-        <!--
+        
         <table>
             <tr>
                 <th>품번</th>
@@ -205,6 +205,6 @@
                 <td>10,000</td>
                 <td></td>
             </tr>
-        </table>-->
+        </table>
 </body>
 </html>
