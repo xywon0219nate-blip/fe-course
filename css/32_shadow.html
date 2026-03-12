@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Style</title>
+    <!--css shadow generator를 검색하면 나오는 사이트에서 효과를 복붙해서 사용하는게 더 편함.
+        아래의 .box의 경우 해당 사이트의 코드를 사용하엿음.
+    -->
+    <style>
+        .text {
+            text-shadow: 10px 5px 0 rgb(92, 89, 89, 0.5);
+        }
+        .box {
+            width: 500px;
+            height: 500px;
+            color: white;
+            background-color: blue;
+            box-shadow: 144px -46px 105px 0px rgba(45,181,181,0.76);
+            -webkit-box-shadow: 144px -46px 105px 0px rgba(45,181,181,0.76);
+            -moz-box-shadow: 144px -46px 105px 0px rgba(45,181,181,0.76);
+            
+        }
+    </style>
+</head>
+<body>
+    <h1>Shadow Style</h1>
+    <h2 class="text">Text-Shadow</h2>
+    <h2 class="box">Box-Shadow</h2>
+</body>
+</html>

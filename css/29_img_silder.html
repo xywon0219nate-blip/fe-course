@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>img_slider</title>
+    <meta name="description" content="img_slider">
+    <style>
+        .slider-wrapper {
+            box-sizing: border-box;
+            position: relative;
+            width: 1200px;
+            height: 400px;
+            margin: auto;
+            border: 1px solid red;
+            text-align: center;
+            top: 50px;
+        }
+        .slider-wrapper img {
+            width: 800px;
+            height: 400px;
+        }
+        button {
+            position: absolute;
+            top: 50%;
+            padding: 10px 20px;
+            color: #ccc;
+            background-color: white;
+            border: none;
+            font-size: 2rem;
+        }
+        .btn-prev {left: 50px;}
+        .btn-next { right: 50px;}
+        button:hover {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>img_slider</h1>
+    <div class="slider-wrapper">
+        <img src="../images/Mad_1920774999.jpg" alt="movie">
+        <button class="btn-prev">&lt;</button>
+        <button class="btn-next">&gt;</button>
+
+    </div>
+</body>
+</html>

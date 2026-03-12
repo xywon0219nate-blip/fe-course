@@ -6,23 +6,32 @@
     <title>positon-relative</title>
     <meta name="description" content="positon-relative">
     <style>
+        /*부모가 relative, 자식은 absoulte*/
         h1,div {
             border: 1px solid red;
             position: relative;
         }
         span {
-            border: 2px solid blue;
+            border: 3px solid blue;
             position: absolute;
-            top: 200px; 
+            top: 100px; 
             /*top의 기준은 가장 왼쪽 위.(기준 0) +의 값을 주면 화면상의 컨텐츠 기준 아래로,
             -의 값을 주면 컨텐츠 기준 위로 줌 (사라진게 아님)*/
-            left: 200px; /*left의 기준은 위에서부터 왼쪽으로 200px*/
+            right: 200px; /*left의 기준은 위에서부터 왼쪽으로 200px*/
+        }
+        .p {
+            width: 600px;
+            height: 300px;
+            border: 2px solid green;
+            position: relative;
         }
     </style>
 </head>
 <body>
     <h1>positon-relative</h1>
     <div>element_1</div>
-    <span>element_2</span>
+    <div class="p">
+        <span>element_2</span>
+    </div>
 </body>
 </html>

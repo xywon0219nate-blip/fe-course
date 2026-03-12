@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>z_index</title>
+    <meta name="description" content="z_index">
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            color: white;
+        }
+        .red  {
+            background-color: red;
+            position: relative;
+            top: 20px;
+            left: 50px;
+        }
+        .blue {
+            background-color: blue;
+            position: relative;
+            top: -20px;
+            left: 70px;
+            z-index: 100;
+            /*원래는 파랑색이 2번째로 보였지만 z-index를 사용하여 가장 앞쪽으로 나오도록 함.
+            가장 앞으로 나오려는 것은 숫자는 가장 크면 됨*/
+        }
+        .green {
+            background-color: green;
+            position: relative;
+            top: -320px;
+            left: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h1>z_index</h1>
+    <div class="red">Child #1</div>
+    <div class="blue">Child #2</div>
+    <div class="green">Child #3</div>
+</body>
+</html>

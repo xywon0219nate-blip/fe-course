@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>logo</title>
+    <meta name="description" content="logo">
+    <style>
+        .parent {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid red;
+            position: relative;
+
+        }
+        .child {
+            position: absolute;
+            top: 20px; /*50%의 경우 화면의 정중앙에 맞춰서 그려지는 것이 아닌 정중앙에서 시작해서 오른쪽에 생성됨.(기준점X,그저 시작 위치)*/
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Logo position</h1>
+    <div class="parent">
+        <img src="https://www.starbucks.co.kr/common/img/common/logo.png" alt="">
+        <p class="child">STARBUCKS COFFEE</p>
+    </div>
+</body>
+</html>
