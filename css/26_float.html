@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>float style</title>
+    <style>
+        .box-group {
+            float: left;/*주석처리를 할 것*/
+        }
+        .box-group div{
+            width: 100px;
+            height: 100px;
+            /*display: inline-block;*/
+            /*display: inline, inline-block의 경우 원래 문자의 옆에 붙기에 float를 주어도 적용 X*/
+        }
+        .d1 {
+            background-color: aquamarine;
+            float: left;
+        }
+        .d2 {background-color: rgb(255, 247, 0);
+            float: left;  /*float를 넣지 않으면 d1과 겹쳐져서 안 보이게 됨*/
+        }
+        .d3 {background-color: rgb(255, 98, 0);
+            float: left; /*자신의 위의 블로기 float이 없는 경우 d3가 새로운 float의 기준이 됨.(d1에 안 안 붙고 d3이후에 float이 생길경우 d3의 옆에 붙음)*/
+        }
+        .box-group p {
+            clear: left;
+            /*float은 상속이 되기 때문에 해당 효과를 받지 않을 경우 clear: 위치; 를 작성한다*/
+        }
+        .img-group {
+            width: 500px;
+            height: 300px;
+            border: 1px solid red;
+        }
+        .img-group img {
+            width: 100px;
+            height: 100px;
+            float: right;
+            padding: 20px;
+        }
+        p.no-float {clear: both;} /*float 속성을 삭제*/
+    </style>
+</head>
+<body>
+    <h1>float style : block-level의 엘리먼트를 한줄로 정렬하여 배치</h1>
+    <div class="box-group">
+        <div class="d1"></div>
+        <div class="d2"></div>
+        <div class="d3"></div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi animi,
+            dolorem vitae inventore error magnam reprehenderit neque corporis omnis maiores,
+            numquam magni non officia eligendi doloribus quaerat ex? Eos, corporis.</p>
+    </div>
+    <div class="img-group">
+        <img src="../images/img01.png" alt="tree">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Recusandae obcaecati nam nihil assumenda, itaque consequatur cumque,
+            magnam a vero architecto cupiditate laboriosam voluptatum tenetur!
+            Voluptates veritatis officia quasi quo tempora?</p>
+        <p class="no-float">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius rerum, nulla, quis eligendi repellat magnam pariatur quisquam fuga fugiat impedit sequi porro modi laudantium dolor neque reprehenderit, eaque perferendis animi.</p>
+    </div>
+</body>
+</html>

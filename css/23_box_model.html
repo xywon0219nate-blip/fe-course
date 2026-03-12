@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Model</title>
+    <meta name="description" content="boxmodel">
+    <style>
+        div {
+            border: 1px solid red;
+            /*padding: 10px;*/
+        }
+        span {
+            /*block이 아니기 때문에 칸이 넘어가 겹쳐지게 됨*/
+            /*display: block; display: block으로 변경 시 선이 침범이 되지 않음*/
+            /*border: 1px solid blue;*/
+            padding: 10px;
+            background-color: aquamarine;
+        }
+        .d1, .d2 {margin: 20px;}
+        .d2 {overflow: hidden;}
+        .d2 span {
+            /*inline-level의 경우 원래 margin이 안 먹힘*/
+            margin: 30px;
+        }
+        .padding {
+            /*border 기준 안쪽 여백*/
+            /*padding : T (top), R(right), B(bottom), L(left)*/
+            /*padding: 10px 30px 50px 40px;*/
+            /*padding: 0px 40px 의 경우 T,R만 적용*/
+            padding: 40px;
+        }
+        .margin {
+            /*border 기준 바깥쪽 여백*/
+            /*margin : T (top), R(right), B(bottom), L(left)*/
+            /*margin: 10px 30px 50px 40px;*/
+            /*margin: 0px 40px 의 경우 T,R만 적용*/
+            margin: 10px 30px 50px 40px;
+        }
+        p , h3{
+            border: 1px solid green;
+            margin: 0; /*margin을 안 넣었을 경우 block-level은 보유하고 있는 고유한 여백이 존재함*/
+            
+        }
+    </style>
+</head>
+<body>
+    <h1>box model style :: padding, border, margin</h1>
+    <div class="d1">Box Model - Content</div>
+    <div class="d2">
+        <span>Box Model - Content(span)</span> 
+        <!--span의 경우 border 내부의 컨텐츠만 여김-->
+    </div>
+    <div class="padding">
+        <h3>padding</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam unde natus sed ducimus praesentium quasi error! Itaque quo voluptates neque aperiam inventore a ipsum, provident asperiores facere temporibus velit cum.</p>
+    </div>
+    <div class="margin">
+        <h3>margin</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam unde natus sed ducimus praesentium quasi error! Itaque quo voluptates neque aperiam inventore a ipsum, provident asperiores facere temporibus velit cum.</p>
+    </div>
+</body>
+</html>
