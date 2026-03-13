@@ -24,10 +24,7 @@
         align-items: center;
         padding-top: 20px;  
         position: relative;         
-    }
-    .header-menu {
-
-    }   
+    } 
     .header-menu-top ul, 
     .header-menu-bottom ul {
         display: flex;
@@ -40,6 +37,7 @@
         font-size: .9rem;
     }
     .header-menu-bottom ul { gap: 30px; }
+    
     .header-menu-top ul a, 
     .header-menu-bottom ul a {
         text-decoration: none;
