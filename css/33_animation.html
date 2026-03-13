@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation style</title>
+    <meta name="">
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid blue; 
+        }
+        .box:hover {
+            /*animation: name(대소문자 구분) duration timing-function delay iteration-count direction fill-mode;*/
+            animation: changeColor 3s 0s 1; /*3s동안 딜레이_시간_0s 1번*/
+        }
+        @keyframes changeColor { /*색 변경~*/
+            from{
+                /*animation 시작 시 스타일 정의*/
+                background-color: aqua;
+            }
+            30%{
+                background-color: red;
+            }
+            /* @% 정도 쯤에 무언가를 넣고 싶다 한다면, 30%{}, 50%{} 처럼 추가로 적으면 됨*/
+            to {
+                /*animation 종료 시 스타일 정의*/
+                background-color: yellow;
+            }
+        }
+        /*BOX 이미지*/
+        .box-image {
+            width: 100%;
+            height: 500px;
+            background-image: url('../images/pattern2.jpg');
+            display: flex;
+            align-items: center; /*가운데로 위치*/
+            justify-content: center; /*정가운데로 위치*/
+            gap: 20px;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+        }
+        /*img1-img5의 공통된 효과 부여*/
+        .img1,.img2, .img3, .img4, .img5 {
+            opacity: 0;
+            animation: fadeInUp 5s ease forwards;
+        }
+
+        /*스타벅스 홈페이지처럼 하나씩 나오도록 딜레이를 부여*/
+        .img1 {
+            animation-delay: 1s;
+        }
+        .img2 {
+            animation-delay: 1.5s;
+        }
+        .img3 {
+            animation-delay: 2s;
+        }
+        .img4 {
+            animation-delay: 2.5s;
+        }
+        .img5 {
+            animation-delay: 3s;
+        }
+        @keyframes fadeInUp{ /*이미지가 서서히 나타나도록~*/
+            from{
+                opacity: 0; /*안보이다가~*/
+                transform: translateY(50px);
+                /*애니메이션이 움직이는 곳을 기준(0)으로 Y축 :+는 아래에서 위로, -는 위에서 아래로 애니메이션 효과가 나타남*/
+                /*애니메이션이 움직이는 곳을 기준(0)으로 X축 :+는 오른->왼으로로, -는 왼->오른으로 애니메이션 효과가 나타남*/
+            }
+            to {
+                opacity: 1; /*나중에 보임~*/
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>animation</h1>
+    <div class="box">box animation</div>
+    <div class="box-image">
+        <img src="../images/favicon.ico" alt="ico" class="img1">
+        <img src="../images/favicon.ico" alt="ico" class="img2">
+        <img src="../images/favicon.ico" alt="ico" class="img3">
+        <img src="../images/favicon.ico" alt="ico" class="img4">
+        <img src="../images/favicon.ico" alt="ico" class="img5">
+    </div>
+</body>
+</html>
