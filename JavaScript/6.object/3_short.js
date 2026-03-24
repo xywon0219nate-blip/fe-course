@@ -26,6 +26,7 @@ console.log();
 console.log(number1);
 console.log(number2);
 
+
 //사원의 이름, 나이, 주소, 소속부서 정보를 입력받아, 사원객체를 반환하는 함수 정의
 //createEmployee, arrow function 사용
 
@@ -35,11 +36,10 @@ const createEmployee = (name,age,address,team) => {
 let emp1 = createEmployee('홍길동',30,'서울시 강남구','운영팀');
 let emp2 = createEmployee('이순신',35,'부산시 서면','개발팀');
 
-console.clear();
-console.log(emp1);
-console.log(emp2)
 
-console.clear();
+console.log(emp1);
+console.log(emp2);
+
 let empList = [
     ['홍길동',30,'서울시','운영팀'], //empList[0]
     ['smith',45,'인천시','개발팀'], //empList[1]
@@ -67,7 +67,7 @@ for (let i=0; i<empList.length; i++) {
     console.log(object);  
 }
 
-console.clear();
+
 for (let i=0; i<empList.length; i++) {
     let object = null; //객체
     let name,age,address,team = undefined; //값j
