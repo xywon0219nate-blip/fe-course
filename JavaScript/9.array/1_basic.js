@@ -11,3 +11,12 @@ let array2 = new Array(2);
 let array3 = new Array(5);
 
 console.log(array1.length, array2.length, array3.length);
+
+let names = ['홍길동','스미스','이순신'];
+let fruits = ['🍎','🍋','🍊'];
+console.log(names.length, fruits.length);
+
+//names 배열에 요소 추가
+names[3] = '제임스'; //에러발생X ->  원래 있던 데이터에 추가되는 것이 아닌, 원래 것을 버리고 새로운 객체를 생성함(메모리 효율성 낮음)
+console.log(names);
+
