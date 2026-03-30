@@ -5,7 +5,7 @@
  * callback : 함수의 인자(파라미터)에서 함수 형식이 들어가는 것
  */
 
-let numbers = [1,2,3,4,5,6];
+let numbers = [1,2,3,4,5,6];s
 numbers.forEach((number,idx,obj)=> console.log(`number[${idx}] = ${number}, ${obj}`)); 
 //값만 줄 때는 앞에 return을 작성해야 하지만, console.log()는 바로 알아서 return하기에 생략해도 괜찮음
 
