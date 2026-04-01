@@ -1,0 +1,56 @@
+{
+    "title": "🍎🍋🍊 Fruits List 🍏🍓🍅",
+    "list": [
+    { 
+        "name": "apple",
+        "color": "red",
+        "emoji": "🍎"
+    },
+    { 
+        "name": "orange",
+        "color": "coral",
+        "emoji": "🍊"
+    },
+    { 
+        "name": "lemon",
+        "color": "yellow",
+        "emoji": "🍋"
+    },
+    { 
+        "name": "apple",
+        "color": "red",
+        "emoji": "🍎"
+    },
+    { 
+        "name": "orange",
+        "color": "coral",
+        "emoji": "🍊"
+    },
+    { 
+        "name": "lemon",
+        "color": "yellow",
+        "emoji": "🍋"
+    },
+    { 
+        "name": "lemon",
+        "color": "yellow",
+        "emoji": "🍋"
+    },
+    { 
+        "name": "lemon",
+        "color": "yellow",
+        "emoji": "🍋"
+    },
+    { 
+        "name": "lemon",
+        "color": "yellow",
+        "emoji": "🍋"
+    }
+]
+}
+
+
+
+
+
+
