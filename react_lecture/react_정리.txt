@@ -12,7 +12,7 @@
       변화가 잦은 대규모 앱 필요
     
     ❗️핵심 목적
-    - 변화가 자주 일오나는 대규모 애플리케이션에 적합한 쉽고 효율적인 라이브러리 개발.
+    - 변화가 자주 일어나는 대규모 애플리케이션에 적합한 쉽고 효율적인 라이브러리 개발.
 
 2. React의 특징
     (1). 컴포넌트 기반
@@ -216,7 +216,43 @@
 			}
 			<button type="button" name="button1" onClick={handleClick} />	
 			<button type="button" name="button2" onClick={(e) => console.log(e.target);} />	
-							
+
+		(4). 이벤트 객체를 활용하여 자식 -> 부모에게 값을 전달하는 건 가능하다
+			function 부모 () {
+				const handleParent = ( 4️⃣result //받은 100의 값을 받을 곳 ) => {
+					console.log('자식이 보내온 값 -> ', result);
+				}
+				return(
+					<자식 1️⃣click={handleParent} />
+				)
+			}
+			function 자식 ( 2️⃣{click} ) {
+				const handleChild = () => {
+					//부모에게 100 전달
+					3️⃣ click(100); //부모에게 받은 props에 값 전달
+				}
+				return(
+					<button type='button' onClick={handleChild}> click <button/>
+				)
+			}
+
+	9. 상태 관리(State) - useState
+		(1). 컴포넌트가 관리하는 동적값이 변경되면, 리액트 컴포넌트가 자동으로 re렌더링함. 
+		(2). useState 사용법
+			형식) 
+			import {useState} from 'react';
+			const[(동적값)변수, set변수명] = useState(변수의 초기값);
+
+			예)
+			Number :: const [number, setNumber] = useState(0);
+			String :: const [string, setString] = useState('');
+			Array :: const [Array,setArray] = useState([]);
+			Object :: const [obj, setObj] = useState({});
 
 
-
+	10.
+	11.
+	12.
+	13.
+	14.
+	15
