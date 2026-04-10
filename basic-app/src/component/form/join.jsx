@@ -19,11 +19,11 @@ export default function Join() {
         name:'',
         phone:'',
         email:'',
-        emailDomain:''
+        emailDomain:'default'
     }
 
     const [form, setForm] = useState(initForm);
-    const [errors, setErrors] = useState({...initForm});
+    // const [errors, setErrors] = useState({...initForm});
 
     const handleFormChange = (e) => {
         const {name, value} = e.target;
@@ -36,7 +36,8 @@ export default function Join() {
         e.preventDefault();
 
         if (idRef.current.value === '') {
-            setErrors({...errors, id:'아이디를 입력해주세요'});
+            // setErrors({...errors, id:'아이디를 입력해주세요'});
+            alert("아이디 입력해주세요");
             idRef.current.focus();
         } else if (pwdRef.current.value === '') {
             alert('패스워드를 입력해주세요');
@@ -56,7 +57,11 @@ export default function Join() {
         } else if (emailDomainRef.current.value === '') {
             alert('도메인을 선택해주세요');
             emailDomainRef.current.focus();
+        } else {
+            console.log('서버전송->');
+            
         }
+
         //validation check
     }
     // console.log('errors->', errors);
@@ -72,9 +77,7 @@ export default function Join() {
                         <ul>
                             <li>
                                 <label htmlFor="" ><b>아이디</b></label>
-                                { form.id ==="" &&
-                                    <span id="idMsg">아이디를 입력해주세요</span>
-                                }
+                                { form.id ==="" && <span id="idMsg">아이디를 입력해주세요</span>}
                                 <div>
                                     <input type="text" name="id" id="id" value={form.id}
                                             onChange={handleFormChange}
@@ -85,9 +88,7 @@ export default function Join() {
                             </li>
                             <li>
                                 <label htmlFor=""><b>비밀번호</b></label>
-                                { form.pwd ==="" &&
-                                    <span id="idMsg">비밀번호를 입력해주세요</span>
-                                }
+                                { form.pwd ==="" && <span id="idMsg">비밀번호를 입력해주세요</span>}
                                 <div>
                                     <input type="password" name="pwd" id="pwd" value={form.pwd}
                                             onChange={handleFormChange}
@@ -97,9 +98,7 @@ export default function Join() {
                             </li>
                             <li>
                                 <label htmlFor=""><b>비밀번호 확인</b></label>
-                                { form.cpwd ==="" &&
-                                    <span id="idMsg">비밀번호를 한번 더 입력해주세요</span>
-                                }
+                                { form.cpwd ==="" &&  <span id="idMsg">비밀번호를 한번 더 입력해주세요</span>}
                                 <div>
                                     <input type="password" name="cpwd" id="cpwd" value={form.cpwd}
                                             onChange={handleFormChange}
@@ -109,6 +108,7 @@ export default function Join() {
                             </li>
                             <li>
                                 <label htmlFor=""><b>이름</b></label>
+                                {form.name === "" && <span id="nameMsg">이름을 입력해주세요</span> }
                                 <div>
                                     <input type="text" name="name" id="name" value={form.name}
                                             onChange={handleFormChange}
@@ -118,6 +118,7 @@ export default function Join() {
                             </li>
                             <li>
                                 <label htmlFor=""><b>전화번호</b></label>
+                                {form.phone === "" && <span id="phoneMsg">전화번호를 입력해주세요</span> }
                                 <div>
                                     <input type="text" name="phone" id="phone" value={form.phone}
                                             onChange={handleFormChange}
@@ -127,9 +128,7 @@ export default function Join() {
                             </li>
                             <li>
                                 <label htmlFor=""><b>이메일 주소</b></label>
-                                { form.email ==="" &&
-                                    <span id="idMsg"> 이메일 주소를 입력해주세요</span>
-                                }
+                                { !(form.emailName !== "" && form.emailDomain !=="default") && <span id="emailMsg">이메일주소를 입력해주세요</span> }
                                 <div>
                                     <input type="text" name="email" id="email" value={form.email}
                                             onChange={handleFormChange}
