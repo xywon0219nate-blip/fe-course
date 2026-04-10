@@ -250,7 +250,21 @@
 			Object :: const [obj, setObj] = useState({});
 
 
-	10.
+	10. Ref - useRef
+		(1). Ref
+			- 실제 DOM 요소를 직접 참조하여 관리하는 기능을 가짐 (= Reference)
+		(2). useRef 사용법
+			import {useRef} from 'react';
+			const text = useRef(null); //default 값 null
+			const handleOnChange = () => {}
+			<input type="text" name="name" ref={nameRef} onChange={handleOnChange}/>
+		(3). useRef 호출 방법
+			- DOM 입력폼 값 가져오기 : nameRef.current.value
+			- DOM 입력폼 포커스 정의 : nameRef.current.focus()
+
+			
+
+
 	11.
 	12.
 	13.
