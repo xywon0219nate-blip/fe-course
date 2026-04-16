@@ -1,13 +1,13 @@
 import './App.css';
+import { useState, useEffect } from 'react';
 import { fetchData } from './util/fetch.js';
-import { useState,useEffect } from 'react';
-import Header from './components/Header.jsx'
-import Content from './components/Content.jsx'
-import Footer from './components/Footer.jsx'
+import Header from './components/Header.jsx';
+import Content from './components/Content.jsx';
+import Footer from './components/Footer.jsx';
 
 export default function App() {
   const [data, setData] = useState({});
-  useEffect(()=> {
+  useEffect(()=>{
     const loadData = async() => {
       const jsonData = await fetchData("http://localhost:5173/data/portfolio.json");
       setData(jsonData);
@@ -15,11 +15,13 @@ export default function App() {
     loadData();
   }, []);
 
+  console.log("data :: ", data);
+  
 
   return (
     <>
-      <Header data={data?.header}/>
-      <Content />
+      <Header data={data?.header} />
+      <Content data={data?.content}/>
       <Footer />
     </>
   )
