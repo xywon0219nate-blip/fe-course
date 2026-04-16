@@ -118,8 +118,9 @@
                     "title": "Project#8",
                     "description": "Clone Coding with HTML, CSS"
                 }
-            ],
-        "testimonials" : [
+            ]
+        },
+        "testimonials": [
                 {
                     "img": "images/testimonials/people1.webp",
                     "alt": "people1",
@@ -143,5 +144,11 @@
                 }
             ]
     },
-    "footer":{}
+    "footer":{
+        "description": "Junior Software Engineer Judy's Portfolio - All right reserved",
+        "list": [
+                {"href": "#", "icon": "github"},
+                {"href": "#", "icon": "linkedin"}
+            ]
+    }
 }
