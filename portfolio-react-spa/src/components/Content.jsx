@@ -1,7 +1,7 @@
 import Home from "./content/Home.jsx"
 import About from "./content/About.jsx"
 import Skills from "./content/Skills.jsx"
-import Work from "./content/Work.jsx"
+import Work from "../pages/Work.jsx"
 import Testimonials from "./content/Testimonials.jsx"
 import ArrowTop from "./content/ArrowTop.jsx"
 

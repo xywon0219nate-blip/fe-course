@@ -7,7 +7,6 @@ import { faL } from "@fortawesome/free-solid-svg-icons";
 export default function Footer({data}) {
     return(
         <>
-        <h1>Footer</h1>
         <footer id="contact" className="footer">
             <Title title ="Let's Talk"/>
             <SubTitle SubTitle="com.developer.judy@gmail.com" />
