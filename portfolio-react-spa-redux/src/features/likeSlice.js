@@ -1,18 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-   count: 99,
+   count: 0,
+   list: []
 }
 
 export const likeSlice = createSlice({
    name: 'like',
    initialState,
    reducers: {
-      setLike: (state) => {
-         state.count += 1
+      increment: (state, action) => {
+         state.count += 1;
+         state.list.push(action.payload.title); 
+         console.log(state.list[0]);
+         console.log(state.list.length);
       },
+      decrement: (state) => {
+         state.count -= 1;
+      }
    },
 })
 
-export const { setLike } = likeSlice.actions
+export const { increment,decrement } = likeSlice.actions
 export default likeSlice.reducer
