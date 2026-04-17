@@ -19,7 +19,8 @@ export default function App() {
    return (
       <>
       <Header  data={data?.header} 
-               like={like} />
+               // like={like} 
+               />
       <Outlet context={{data : data?.content, like, setLike}}/> 
       <Footer data={data?.footer} />
       </>
