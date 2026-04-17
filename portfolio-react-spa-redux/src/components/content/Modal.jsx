@@ -8,8 +8,7 @@ export default function Modal({ project, onClose}) {
       <div className="modal-overlay" onClick={onClose}>
          <div 
                className="modal-content" 
-               onClick={(e) => e.stopPropagation()}
-         >
+               onClick={(e) => e.stopPropagation()}>
                <span className="close-btn" onClick={onClose}>✕</span>
                <h2>{project.title}</h2>
                <img src={project.img} alt={project.alt} />

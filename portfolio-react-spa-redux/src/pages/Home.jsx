@@ -24,6 +24,7 @@ export default function Home() {
                   name={menuName} />
          <h2>🤍 [{likeCount}]</h2>
          <p>{projectList}</p>
+         
       </section>
    )
 }

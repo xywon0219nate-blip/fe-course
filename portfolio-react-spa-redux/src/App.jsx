@@ -18,9 +18,7 @@ export default function App() {
 
    return (
       <>
-      <Header  data={data?.header} 
-               // like={like} 
-               />
+      <Header  data={data?.header} />
       <Outlet context={{data : data?.content}}/> 
       <Footer data={data?.footer} />
       </>
