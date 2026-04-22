@@ -49,6 +49,7 @@ SELECT * FROM EMPLOYEE;
 SELECT EMP_NAME, GENDER, HIRE_DATE FROM EMPLOYEE;
 
 -- 사원테이블의 사번, 사원명, 성별, 입사일, 급여를 조회
+desc employee;
 select emp_id,
 	emp_name,
     gender,
@@ -57,7 +58,7 @@ select emp_id,
 	from employee;
 
 -- 부서테이블의 모든 정보 조회
-select dept_id from employee;
+show tables;
 
 -- AS  : 컬럼명 별칭 부여 
 -- 형식> SELECT [컬럼명 as 별칭, ...] FROM [테이블명];
