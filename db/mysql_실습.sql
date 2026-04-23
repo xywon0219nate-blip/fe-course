@@ -885,33 +885,229 @@ select count(*)
     
 -- 사원테이블, 부서테이블, 본부테이블 inner join
 select *
-	from employee e inner join department d	on e.dept_id = d.dept_id
-					inner join unit u on d.unit_id = u.unit_id;
+	from employee e inner join department d
+					on e.dept_id = d.dept_id
+                    inner join unit u
+                    on d.unit_id = u.unit_id;
 
--- 위와 동일한 내용.
-select *
+select * 
 	from employee e, department d, unit u
     where e.dept_id = d.dept_id
-    and d.unit_id = u.unit_id;
-
--- 모든 사원들의 사원번호, 사원명, 부서아이디, 부서명, 입사일 급여를 조회
-select emp_id, emp_name, d.dept_id, d.dept_name, hire_date, salary
+		and d.unit_id = u.unit_id;
+                    
+-- 모든 사원들의 사원번호, 사원명, 부서아이디, 부서명, 입사일, 급여를 조회
+select e.emp_id, emp_name, d.dept_id, d.dept_name, hire_date, salary
 	from employee e, department d
     where e.dept_id = d.dept_id;
-    
+                    
 -- '영업'에 속한 사원들의 사원명, 입사일, 퇴사일, 급여, 부서아이디, 부서명 조회
--- 재직중인 사원은 '현재 날짜'로 출력
-
-select d.dept_id, e.emp_name, e.hire_date, ifnull(e.retire_date,curdate()) as retire_date, e.salary, d.dept_name
+-- 재직중인 사원은 현재날짜로 출력						
+select  e.emp_name,
+		e.hire_date,
+        ifnull(e.retire_date, curdate()) as retire_date,
+        e.salary,
+        d.dept_id,
+        d.dept_name
 	from employee e, department d
-    where e.dept_id = d.dept_id and d.dept_name = '영업';
+    where e.dept_id = d.dept_id
+		and d.dept_name = '영업';
 
 -- '2015'년도에 입사자들의 사번, 사원명, 입사일, 부서명, 본부아이디, 본부명을 조회
-select d.dept_id, e.emp_name, e.hire_date, u.unit_id, u.unit_name
+select  e.emp_id,
+		e.emp_name,
+        e.hire_date,
+        d.dept_name,
+        u.unit_id,
+        u.unit_name
+	from employee e, department d, unit u
+    where e.dept_id = d.dept_id
+		and d.unit_id = u.unit_id
+        and left(e.hire_date, 4) = '2015';
+
+use hrdb2019;
+select database();
+
+-- 인사과에 속한 사원들 중에 휴가를 사용한 사원의 내역 조회
+-- 부서명은 '인사'
+select *
+	from employee e, department d, vacation v
+    where e.dept_id = d.dept_id
+		and e.emp_id = v.emp_id
+        and d.dept_name = '인사';
+
+select *
+	from employee e inner join department d on e.dept_id = d.dept_id
+					inner join vacation v on e.emp_id = v.emp_id
+	where d.dept_name = '인사';
+    
+-- 사원별 휴가사용 일수를 조회, 사원아이디, 사원명, 휴가일수 출력
+-- 사용일수 기준 내림차순 정렬, 상위 5명 출력
+select 	e.emp_id,
+		e.emp_name, 
+        count(*) as count
+	from employee e, vacation v
+    where e.emp_id = v.emp_id
+    group by e.emp_id
+    order by count desc
+    limit 5;
+
+select 	e.emp_id,
+		e.emp_name, 
+        count(*) as count
+	from employee e inner join vacation v
+					on e.emp_id = v.emp_id
+    group by e.emp_id
+    order by count desc
+    limit 5;
+
+-- 영업부서 사원의 사원명, 폰번호, 부서명, 휴가사용 이유, 소속본부 조회
+-- 휴가사용 이유가 '두통'인 사원 조회
+select  e.emp_name,
+		e.phone,
+        d.dept_name,
+        v.reason,
+        u.unit_name
+	from unit u, department d, employee e, vacation v
+    where u.unit_id = d.unit_id
+		and d.dept_id = e.dept_id
+        and e.emp_id = v.emp_id
+        and d.dept_name = '영업'
+        and v.reason = '두통';
+
+-- ANSI SQL
+select  e.emp_name,
+		e.phone,
+        d.dept_name,
+        v.reason,
+        u.unit_name
+	from unit u inner join department d on u.unit_id = d.unit_id
+				inner join employee e on d.dept_id = e.dept_id
+                inner join vacation v on e.emp_id = v.emp_id
+    where d.dept_name = '영업'
+        and v.reason = '두통';
+        
+        
+-- 2014년부터 2016년까지 입사한 사람들 중에서 퇴사하지 않은 사원들의 사원아이디., 사원명, 부서명, 입사일. 소속본부를 조회
+-- 소속본부 기준으로 오름차순 정렬
+select e.emp_id, e.emp_name, d.dept_id, e.hire_date, u.unit_name
 	from employee e, department d, unit u
     where e.dept_id = d.dept_id
     and d.unit_id = u.unit_id
-	and left(e.hire_date,4) = '2015';
+    and left(e.hire_date,4) between '2014' and '2016'
+    and retire_date is null
+    order by u.unit_id asc;
+
+-- ANSI SQL
+select e.emp_id, e.emp_name, d.dept_id, e.hire_date, u.unit_name
+	from employee e, department d, unit u
+    where e.dept_id = d.dept_id
+    and d.unit_id = u.unit_id
+    and left(e.hire_date,4) between '2014' and '2016'
+    and retire_date is null
+    order by u.unit_id asc;
+    
+-- 부서별 총급여, 평균급여, 총휴가사용일수를 조회
+-- 부서명, 부서아이디, 총급여, 평균급여, 휴가사용일수
+    
+select d.dept_name as '부서아이디' ,
+		d.dept_id as '부서명',
+        concat(format(sum(e.salary),0),'원') as '총급여',
+		concat(format(truncate(avg(e.salary),2),0),'원') as '평균급여',
+        count(v.emp_id) as '휴가사용일수'
+	from employee e, department d, vacation v
+    where e.dept_id = d. dept_id
+    and e.emp_id = v.emp_id
+    group by d.dept_id;
+
+-- ANSI SQL
+select d.dept_name as '부서아이디' ,
+		d.dept_id as '부서명',
+        concat(format(sum(e.salary),0),'원') as '총급여',
+		concat(format(truncate(avg(e.salary),2),0),'원') as '평균급여',
+        count(v.emp_id) as '휴가사용일수'
+	from employee e inner join department d on e.dept_id = d.dept_id
+					inner join vacation v on e.emp_id = v.emp_id
+    group by d.dept_id, d.dept_name;
+    
+-- 본부별로 그룹핑 한 후 부서의 휴가사용 일수를 조회
+select u.unit_id, u.unit_name, e.emp_name, d.dept_name,
+		sum(v.duration) -- 개인별 휴가 사용 일수,
+	from employee e, department d, vacation v, unit u
+    where e.emp_id = v.emp_id
+    and  e.dept_id = d.dept_id
+    and d.unit_id = u.unit_id
+	group by u.unit_id, d.dept_id, e.emp_id;
+
+-- ANSI SQL
+select u.unit_id,
+		u.unit_name,
+		e.emp_name,
+        d.dept_name,
+		sum(v.duration) -- 개인별 휴가 사용 일수,
+	from employee e inner join deprtment d on e.dept_id = d.dept_id
+					inner join vacation v on e.emp_id = v.emp_id
+                    inner join unit u on d.unit_id = u.unit_id
+	group by u.unit_id, d.dept_id, e.emp_id;
+
+-- 본부별 부서의 휴가사용 일수를 조회
+select u.unit_id,
+		u.unit_name,
+		d.dept_name,
+		sum(v.duration) -- 개인별 휴가 사용 일수,
+	from employee e, department d, vacation v, unit u
+    where e.emp_id = v.emp_id
+    and  e.dept_id = d.dept_id
+    and d.unit_id = u.unit_id
+	group by u.unit_id, d.dept_id;
+
+
+-- [OUTER JOIN]
+-- 오라클 INNER JOIN(EQUI JOIN) 문법에 (+) 코드를 추가하여 사용
+-- 현재 오라클 문법은 MYSQL에서는 사용 불가
+-- 형식1 > SELECT [컬럼리스트]
+-- 		FROM [테이블1] LEFT/RIGHT OUTER JOIN [테이블2]
+-- 			ON [테이블1. 조인컬럼] = [테이블2.조인컬럼]
+
+select count(distinct dept_id) from employee; -- 6
+select count(dept_id) from department; -- 7
+
+select unit_id, start_date, dept_name, dept_id 
+	from department
+    order by dept_id;
+    
+-- 부서별 사원수 조회 (누락된 부서가 생길 수 있음; 홍보부서)
+select e.dept_id,
+		d.dept_name,
+        count(*)
+        from employee e, department d
+        where e.dept_id = d.dept_id
+        group by d.dept_id;
+        
+-- LEFT OUTER JOIN : LEFT에 부서테이블 위치
+-- 부서별 사원수 조회, 전체 부서 출력
+select e.dept_id,
+		d.dept_name,
+        count(emp_id) as '사원수'
+        from department d left outer join employee e 
+			on d.dept_id = e.dept_id
+		group by d.dept_id;
+        
+-- RIGHT OUTER JOIN : RIGHT에 부서테이블 위치
+-- 부서별 사원수 조회, 전체 부서 출력
+select e.dept_id,
+		d.dept_name,
+        count(emp_id) as '사원수'
+        from  employee e  right outer join department d -- 해당 부분을 위와 다르게 바꿈
+			on d.dept_id = e.dept_id
+		group by d.dept_id;
+
+-- 모든 부서의 아이디, 부서명, 본부명을 조회
+-- 본부에 속하지 않은 부서는 '준비중'으로 출력
+select d.dept_id,
+		d.dept_name,
+        ifnull(u.unit_name, '준비중') as unit_name
+        from department d left outer join unit u
+        on d.unit_id = u.unit_id;
 
 
 
