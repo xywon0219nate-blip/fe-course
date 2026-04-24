@@ -1292,4 +1292,240 @@ select min(retire_date) from employee;
 select *
 	from employee
     where retire_date = (select min(retire_date) from employee);
+    
+    
+use hrdb2019;
+select database();
+
+-- [서브쿼리 : 단일행]
+-- 가장 많은 휴가(duration)를 사용한 사원이 속한 부서의 모든 사원들을 조회
+
+select * from employee;
+
+select emp_id 
+	from vacation order by duration desc limit 1;
+
+select dept_id from employee 
+	where emp_id = (select emp_id from vacation order by duration desc limit 1);
+
+select *
+	from employee
+    where dept_id = (select dept_id from employee 
+									where emp_id = (select emp_id from vacation order by duration desc limit 1)); -- 최종
+
+-- JOIN으로 사용한 방법
+select * from employee
+where dept_id = 
+(select distinct e.dept_id
+	from employee e, vacation v
+    where e.emp_id = v.emp_id
+		and e.emp_id = (select emp_id from vacation order by duration desc limit 1));
+        
+-- [서브쿼리 : 다중행 - IN, EXIST ...]
+-- '제3본부'에 속한 모든 사원 정보 조회
+
+select unit_id from unit where unit_name = '제3본부';
+select dept_id from department where unit_id = 'C';
+select * from employee
+	where dept_id in ('ADV','MKT');
+    
+select * from employee
+	where dept_id in(select dept_id
+					from department
+					where unit_id = (select unit_id
+									from unit
+                                    where unit_name='제3본부')); -- 최종
+    
+-- '제3본부'에 속한 모든 사원의 휴가 사용 정보 조회
+select * from vacation;
+select * from vacation 
+		where emp_id in (select emp_id 
+						from employee
+						where dept_id in (select dept_id
+										from department
+										where unit_id = (select unit_id
+														from unit
+														where unit_name='제3본부')));
+                                                        
+-- 휴가를 한 번이라도 사용한 모든 사원 조회	
+select count(*) from employee e
+	where exists (select 1 
+					from vacation v
+						where e.emp_id = v.emp_id);
+
+select count(*) from (select distinct emp_id from vacation) T;    
+    
+-- [인라인뷰 : 메인쿼리의 테이블 자리에 들어가는 쿼리 형식]
+-- 사원별 휴가사용 일수를 그룹핑하여, 사원번호, 사원명, 입사일, 급여, 휴가사용일수를 조회
+-- 1) 사원별 휴가사용 일수 그룹핑
+select emp_id, sum(duration) count
+	from vacation 
+	group by emp_id;
+
+-- 2) employee 테이블과 inner join
+select *
+	from employee e,
+		(select emp_id, sum(duration) count
+		from vacation 
+		group by emp_id) v
+	where e.emp_id = v.emp_id;
+    
+
+select e.emp_id,
+		e.emp_name,
+        e.hire_date,
+        e.salary,
+        v.count as '휴가사용일수'
+	from employee e,
+		(select emp_id, sum(duration) count
+		from vacation 
+		group by emp_id) v
+	where e.emp_id = v.emp_id;
+    
+-- ANSI SQL
+select e.emp_id,
+		e.emp_name,
+        e.hire_date,
+        e.salary,
+        v.count as '휴가사용일수'
+	from employee e inner join
+		(select emp_id, sum(duration) count
+		from vacation 
+		group by emp_id) v
+	on e.emp_id = v.emp_id;
+
+-- [휴가를 사용한 사원 + 사용하지 않은 사원 포함]
+-- 사원별 휴가사용 일수를 그룹핑하여, 사우너번호, 사원명, 입사일, 급여, 휴가사용일수를 조회
+-- 휴가를 사용하지 않은 사원의 휴가사용일수는 0
+-- 휴가사용일수는 내림차순 정렬
+select e.emp_id,
+		e.emp_name,
+        e.hire_date,
+        e.salary,
+        ifnull(v.count,0) as count
+from employee e left outer join
+	(select emp_id, sum(duration) as count
+	from vacation
+	group by emp_id) v
+	on e.emp_id = v.emp_id
+    order by count desc;
+    
+-- '2015' ~ '2017'년도 입사한 사원들의 휴가사용 일수 조회
+select * 
+		from employee
+		where left(hire_date,4) beteween '2015' and '2017';
+-- 2) 사원별 총 휴가일수 조회
+select emp_id, sum(duration) as count
+	from vacation
+    group by emp_id;
+
+-- 3) 1,2을 조인
+select t1.emp_id,
+		t1.emp_name,
+        t1.hire_date,
+        ifnull(t2.count,0) as count
+	from (select * 
+			from employee
+            where left(hire_date,4) between '2015' and '2017') t1
+            left outer join
+				(select emp_id, sum(duration) as count
+				from vacation
+				group by emp_id) t2
+			on t1.emp_id = t2.emp_id
+            order by count desc;
+
+-- 1) 부서별 총급여, 평균급여를 조회
+select 	dept_id,
+		sum(ifnull(salary,0)) as sum,
+		avg(ifnull(salary,0)) as avg
+	from employee
+    group by dept_id;
+
+-- 2) 부서테이블과 조인하여 모든 부서의 총급여, 평균급여 출력
+select count(*) from department;
+select d.dept_id,
+		d.dept_name,
+		d.unit_id,
+		d.start_date,
+		ifnull(t1.sum, 0) sum, 
+		ifnull(t1.avg,0) avg
+	from department d left outer join
+    (select dept_id, 
+			sum(ifnull(salary,0)) as sum,
+			avg(ifnull(salary,0)) as avg
+	from employee
+    group by dept_id) t1
+    on d.dept_id = t1.dept_id;
+
+-- 3) 사원테이블을 조인하여, 사원명, 급여, 부서아이디, 부서명, 총급여, 평균급여 조회
+select  e.emp_name,
+		e.salary,
+        s.dept_id,
+        s.dept_name,
+        s.sum,
+        s.avg
+	from employee e,
+		(select  d.dept_id,
+				d.dept_name, 
+				d.unit_id,
+				d.start_date,
+				ifnull(t1.sum, 0) sum,
+				ifnull(t1.avg, 0) avg
+			from department d left outer join
+							(select  dept_id,
+									sum(ifnull(salary, 0)) sum, 
+									floor(avg(ifnull(salary, 0))) avg
+								from employee
+								group by dept_id) t1
+							on d.dept_id = t1.dept_id) s
+	where e.dept_id = s.dept_id;
+
+-- [스칼렛서브쿼리 : 컬럼리스트에 사용하는 서브쿼리 형식]
+-- 정보시스템 부서의 사원정보 출력
+-- 정보시스템 부서의 총급여, 평균급여 함께 출력
+select emp_id,
+	emp_name,
+    dept_id,
+    salary,
+    (select sum(salary) from employee where dept_id='SYS') as '총급여',
+    (select sum(salary) from employee where dept_id='SYS') as '평균급여'
+	from employee
+    where dept_id = 'SYS';
+    
+select sum(salary) from employee where dept_id='SYS';
+select floor(avg(salary)) from employee where dept_id='SYS';
+    
+/****************************************************************
+	테이블 결과 합치기 : union , union all
+    형식 > 쿼리1 실행 결과
+		union -> 중복 제거
+        쿼리2 실행 결과
+        
+	형식 > 쿼리1 실행 결과
+		union all -> 중복 허용
+        쿼리2 실행 결과
+	
+	⚠️쿼리1, 쿼리2의 실행 컬럼의 타입과 이름이 동일해야함.
+****************************************************************/
+
+-- 영엉(MKT), 정보시스템(SYS) 부서의 사원아이디, 사원명, 급여, 부서아이디 조인
+-- union을 사용하여 실행결과 합치기
+select emp_id, emp_name, salary, dept_id
+	from employee
+    where dept_id = 'MKT'
+union
+select emp_id, emp_name, salary, dept_id
+	from employee
+    where dept_id = 'SYS'
+union all
+select emp_id, emp_name, salary, dept_id
+	from employee
+    where dept_id = 'SYS';
+    
+/****************************************************************
+	논리적인 테이블 : 뷰(View)
+    - SQL을 실행하여 생성된 결과를 가상테이블로 정의
+    - 생성 > CREATE VIEW [VIEW NAME]
+			AS[ SQL 정의 ]
+****************************************************************/
 
