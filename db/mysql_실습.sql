@@ -1954,16 +1954,53 @@ select * from employee;
 
 desc copy_emp;
 select count(*) from copy_emp;
+select * from copy_emp;
+
+-- 홍길동 사원의 급여를 6000으로 수정
+update copy_emp
+	set salary = '6000'
+	where emp_id = 'S0001';
+select * from copy_emp where emp_id='S0001';
+
+-- 안경태 사원의 입사일을 '20210705'로 수정
+update copy_emp
+	set hire_date = cast('20210705' as date)
+    -- 실제로 데이터 타입을 확인했을 경우  ate 타입이기에 문자로만 작성할 경우 다른 부분에서는 충분히 오류가 날 수 있다.
+    -- 즉, 문자가 아닌 데이트 타입으로 변경하는 것을 권장함
+    -- cast 함수를 이용하여 데이터 타입 변경
+    where emp_name = '안경태';
+select * from copy_emp where emp_name = '안경태';
+
+desc copy_emp;
+show tables;
+desc emp2;
+-- (1) emp2 테이블에 retire_date 컬럼 추가 : date, null 허용
+-- (2) null 데이터를 현재 날짜로 수정
+-- (3) retire_date를 'nor null' 제약 정의
+
+select count(*) from emp2; -- 6
+
+alter table emp2 add retire_date date;
+desc emp2;
+select * from emp2;
+update emp2 set reitre_date = now();
+alter table emp2 modify retire_date date not null;
+alter table emp2 modify retire_date date;
+
+-- '정보시스템' 부서의 모든 사원 급여를 20% 추가
+select * from copy_emp;
+update copy_emp
+	set salary = salary + salary * 0.2
+    where dept_id = (select dept_id from department where dept_name = '정보시스템');
+select @@autocommit; -- 1
+
+-- 'S0003'인 강우동 사원의 영어이름을 'kang', 입사일은 현재날짜, 부서를 MLT로 변경
+select * from copy_emp where emp_id = 'S0003';
+update copy_emp 
+	set eng_name = 'kang',
+		hire_date = now(),
+        dept_id = 'MLT'
+	where emp_id = 'S0003';
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+select @@autocommit; -- 1
     
