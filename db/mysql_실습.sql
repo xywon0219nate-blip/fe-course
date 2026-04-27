@@ -1911,15 +1911,49 @@ desc emp;
 		  SET [컬럼명 = NEW 데이터, ...] 
           WHERE [조건절]
 	   ⭐️ MySQL에서는 Update 권한을 벼경 후 진행해야 함
-       -> SET SQL_SAFE_UPDATE = 0(허용)/ 1(불가) = defalut 값
+       -> SET SQL_SAFE_UPDATES = 0(허용)/ 1(불가) = defalut 값
                 
 **************************************************************/  
 select * from emp;
--- S001 사번의 폰번호 업데이트 
+-- S001 사번의 폰번호 업데이트 , 업데이트 모드를 허용으로 수정
+set sql_safe_updates = 0;
 update emp
 	set phone = '010-1234-4567'
     where eid = 'S001';
-    
+
+-- 모든 사원의 폰번호를 '010-1111-1234'으로 수정~
+select * from emp;
+update emp
+	set phone = '010-1111-1234';
+
+select * from emp;
+desc emp; -- 현재 타입이 NULL YES으로 되어있음
+
+-- phone 컬럼에 not null 제약을 추가
+alter table emp
+	modify phone char(20) not null; -- 타입을 NULL NO로 변경
+desc emp; -- 결과확인
+
+-- emp  테이블에 email 컬럼 추가 후 not null 제약 정의
+-- 방법1) 컬럼 추가 시 null 허용
+-- 방법2) update 명령으로 기존 데이터 추가
+-- 방법3) not null 제약 정의
+alter table emp add email varchar(20);
+desc emp;
+select * from emp;
+update emp set email = 'test@naver.com';
+alter table emp modify email varchar(20) not null;
+desc emp;
+
+
+-- employee 테이블을 복제라여 copy_emp 테이블 생성
+show tables;
+create table copy_emp
+as 
+select * from employee;
+
+desc copy_emp;
+select count(*) from copy_emp;
     
     
     
