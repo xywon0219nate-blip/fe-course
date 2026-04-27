@@ -2002,5 +2002,55 @@ update copy_emp
         dept_id = 'MLT'
 	where emp_id = 'S0003';
     
-select @@autocommit; -- 1
-    
+-- 트랜잭션별 업데이트 정의
+-- 트랙잭션 관리 명령어 DTL : commit(작업완료), rollback(작업복원)
+-- DML 명령어에 영향을 줌, DDL은 관리방식에 상관없이 무조건 autocommit
+select @@autocommit; -- 현재 트랜잭션 방식 확인, 1인 경우 자동으로 시스템이 트랜잭션 관리를 함
+set autocommit = 0; -- 트랜잭션 관리 방식을 수동으로 변환
+
+select * from emp;
+commit; -- 새로운 트랜잭션이 해당 부분부터 시작
+
+select * from emp;
+
+-- 이순신의 급여를 3000으로 수정
+update emp set salary = 3000 where eid = 'S002'; -- 값이 바뀌어야하는데 안 바뀜 /. -- 물리적 DB에 반영되기 전
+select * from emp;
+-- rollback;
+commit;
+
+select * from emp;
+/***************************************************************
+	데이터 삭제 : DELETE
+    형식 > DELETE FROM [테이블명]
+          WHERE [조건절]
+	   ⭐️ MySQL에서는 Update 권한을 벼경 후 진행해야 함
+       -> SET SQL_SAFE_UPDATES = 0(허용)/ 1(불가) = defalut 값
+**************************************************************/  
+select @@sql_safe_updates; -- 업데이트 모드 해제
+select @@autocommit; 	   -- 수동으로 트랜잭션 관리
+commit;
+-- emp 테이블의 이순신, 홍길동 사원 삭제
+select * from emp;
+delete from emp where eid = 'S002';
+rollback;
+
+select * from emp;
+delete from emp 
+	where eid in ('S001', 'S002');
+commit;
+select * from emp;
+rollback; -- 이미 commit을 실행을 한 후이기에 롤백 불가
+
+-- 
+commit;
+-- emp 테이블의 모든 사원을 삭제. 단, truncate 명령어 사용
+truncate table emp; -- emp 테이블의 모든 row가 삭제 / truncate table은 DDL의 명령이기에 롤백이 불가.(autocommit 됨)
+select * from emp;
+rollback; -- 불가능
+commit; 
+
+
+set autocommit = 1;
+select @@autocommit;
+   
