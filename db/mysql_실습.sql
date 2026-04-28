@@ -2125,10 +2125,145 @@ select * from information_schema.table_constraints
 select * from information_schema.table_constraints
 	where table_name = 'emp_const3';
 
+/**************************************************************  
+	제약사항 추가/수정/삭제
+    형식 > ALTER TABLE [테이블명]
+		  ADD CONSTRAINT [제약사항명] 제약사항(컬럼)
+          MODIFY CONSTRAINT [제약사항명] 제약사항(컬럼)
+          DROP [제약사항명]
+	   ⭐️ 제약사항은 삭제 후 재정의하는 것을 원칙으로 함
+**************************************************************/  
 
+-- emp_const 테이블의 제약사항 확인
+select * from information_schema.table_constraints
+	where table_name = 'emp_const';
+desc emp_const;
 
+-- emp_const 테이블에 phone 컬럼 추가, char(13)
+select * from emp_const;
+alter table emp_const 
+	add column phone char(13) not null;
 
+desc emp_const;
 
+-- phone 컬럼에 null 값을 '010-1111-1234' 수정
+select @@sql_safe_updates;
+update emp_const set phone = '010-1111-1234';
+select * from emp_const;
 
+-- phone 컬럼에 default 제약사항 추가 '010-1111-1234' 수정
+alter table emp_const
+	modify phone char(13) default '010-1111-1234';
+desc emp_const;
+select * from information_schema.table_constraints
+	where table_name = 'emp_const'; 
+    
+select * from emp_const;
+insert into emp_const(emp_id, emp_name, hire_date)
+	values ('S003', '홍길동', now());
 
+-- salary 컬럼에 default 제약 추가 기본값 : 1000
+alter table emp_const
+	modify salary int default 1000;
+desc emp_const;
 
+-- hire_date 컬럼에 default 제약 추가 curdate() 함수사용 불가, '년-월-일'
+alter table emp_const
+	modify hire_date date default '2026-01-01';
+desc emp_const;
+
+insert into emp_const(emp_id, emp_name) values('S004','김유신');
+select * from emp_const;
+
+-- check 제약 : mysql 8.0(+)
+desc emp_const;
+desc emp_const3;
+
+-- emp_const3 테이블의 hire_date 컬럼은 default 제약 추가, '2026-04-01'
+select * from emp_const3;
+alter table emp_const3
+	modify hire_date date default '2026-04-01';
+
+-- salary 컬럼은 not null 제약 변경
+alter table emp_const3
+	modify salary int not null;
+
+desc emp_const3;
+
+-- salary 값 입력시 '3000' 이상인 값만 저장되도록 체크
+alter table emp_const3
+	add constraint chk_emp_const3_salary check (salary >= 3000);
+select * from information_schema.table_constraints
+	where table_name = 'emp_const3';
+    
+select * from emp_const3;
+insert into emp_const3(emp_id, emp_name, salary)
+	values('S001','홍길동',4000); -- 1000을 넣을 경우 값이 3000보다 적기에 3000이상부터가 가능함 
+    
+-- emp_const3 테이블에 emp_name 컬럼에 unique 제약 추가
+select * from information_schema.table_constraints
+	where table_name = 'emp_const3';
+    
+select * from information_schema.key_column_usage
+	where table_name = 'emp_const3';
+	
+alter table emp_const3
+	add constraint un_emp_const3_emp_name unique(emp_name);
+    
+select * from emp_const3;
+insert into emp_const3
+	values('S002', '홍길순', curdate(), 3000);
+    
+    
+-- 
+desc emp_const2;
+select * from emp_const2;
+
+-- emp_const2 데이터 삭제
+delete from emp_const2;
+
+-- emp_id 기본키 제약 추가
+alter table emp_const2
+	add constraint pk_emp_const2_emp_id primary key(emp_id);
+desc emp_const2;
+select * from information_schema.table_constraints
+	where table_name = 'emp_const2';
+    
+select * from emp_const2;
+-- dept_id 컬럼 추가 char(3), not null 제약 추가
+alter table emp_const3
+	add column dept_id char(3) not null;
+desc emp_const2;
+
+-- department를 복제하여 department2 테이블 생성
+select * from department;
+create table department2
+as
+select * from department;
+
+desc department;
+desc department2;
+
+select * from department2;
+-- dept_id 컬럼에 기본키 제약 추가
+alter table department2
+	add constraint pk_department2_dept_id primary key(dept_id);
+    
+select * from information_schema.table_constraints
+	where table_name = 'department2';
+    
+-- emp_const2 테이블의 dept_id 컬럼 참조 제약 추가 --> department2의 dept_id
+desc emp_const2;
+desc department2;
+
+alter table emp_const2
+	rename column dept_id to did; -- 컬럼 이름 수정	
+    
+
+-- emp_const2의 did(부서아이디) 컬럼에 참조키 	
+alter table emp_const2
+	add constraint fk_emp_const2_did foreign key(did)
+		references departement2(dept_id);
+        
+select * from information_schema.table_constraints
+	where table_name = 'emp_const2';
