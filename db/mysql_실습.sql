@@ -2326,4 +2326,6 @@ select * from emp_const2;
 
 -- department2의 'ABC' 부서를 삭제
 delete from department2 where dept_id = 'ABC';
+
+
     
