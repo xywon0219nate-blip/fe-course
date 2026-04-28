@@ -2245,6 +2245,7 @@ desc department;
 desc department2;
 
 select * from department2;
+
 -- dept_id 컬럼에 기본키 제약 추가
 alter table department2
 	add constraint pk_department2_dept_id primary key(dept_id);
@@ -2263,7 +2264,66 @@ alter table emp_const2
 -- emp_const2의 did(부서아이디) 컬럼에 참조키 	
 alter table emp_const2
 	add constraint fk_emp_const2_did foreign key(did)
-		references departement2(dept_id);
+		references department2(dept_id);
         
 select * from information_schema.table_constraints
 	where table_name = 'emp_const2';
+    
+desc emp_const2;
+select * from emp_const2;
+insert into emp_const2(emp_id, emp_name, did)
+	values('S001', '홍길동', 'SYS');
+insert into emp_const2(emp_id, emp_name, did)
+	values('S002', '이순신', 'ACC');
+
+select * from department2;
+select * from emp_const2;
+
+-- department2 테이블의 SYS 부서를 삭제한다면
+-- (1). emp_const2 테이블의 sys 참조 행을 삭제
+-- (2) department2 테이블의 sys 데이터 삭제 가능
+delete from department2 
+	where dept_id = 'SYS';
+
+-- (1).
+delete from emp_const2 where did = 'sys';
+select * from emp_const2;
+
+-- (2). 
+delete from department2 where dept_id = 'sys';
+select * from department2;
+
+-- ⭐️ 참조하는 부모테이블이의 컬럼이 변화함에 따라 자식도 함께 적용받도록 옵션 정의
+-- ON [DELETE/UPDATE] ~ CASCADE; 참조키 제약 정의시 마지막에 추가
+select * from information_schema.table_constraints
+	where table_name = 'emp_const2';
+
+-- emp_const2 테이블의 참조키 제약 삭제
+alter table emp_const2
+	drop constraint fk_emp_const2_did;
+    
+-- emp_const2 테이블의 참조키 제약, on delete/update cascade 추가
+alter table emp_const2
+	add constraint fk_emp_const2_did foreign key(did)
+		references department2(dept_id)
+			on delete cascade
+            on update cascade;
+desc department2;
+desc emp_const2;
+
+select * from information_schema.key_column_usage
+	where table_name = 'emp_const2';
+    
+select * from emp_const2;
+
+-- department2의 'ACC' 부서를 'ABC' 부서로 수정
+update department2
+	set dept_id = 'ABC'
+    where dept_id = 'ACC';
+
+select * from department2;
+select * from emp_const2;
+
+-- department2의 'ABC' 부서를 삭제
+delete from department2 where dept_id = 'ABC';
+    
