@@ -1628,7 +1628,8 @@ select 	ve.emp_name,
     where u.unit_id = ve.unit_id
     and ve.duration >= 15
     order by ve.duration desc;
-    
+/***************************************************************/
+-- 2026-04-27(월)
 /***************************************************************
 	DDL(Data Definition Language) : 생성, 수정, 삭제 -> 테이블 기준
 	DML(Data Manuplation Language) : 생성, 읽기, 수정, 삭제 -> 데이터 기준
@@ -1912,7 +1913,6 @@ desc emp;
           WHERE [조건절]
 	   ⭐️ MySQL에서는 Update 권한을 벼경 후 진행해야 함
        -> SET SQL_SAFE_UPDATES = 0(허용)/ 1(불가) = defalut 값
-                
 **************************************************************/  
 select * from emp;
 -- S001 사번의 폰번호 업데이트 , 업데이트 모드를 허용으로 수정
@@ -2053,4 +2053,82 @@ commit;
 
 set autocommit = 1;
 select @@autocommit;
-   
+
+/***************************************************************/
+-- 2026-04-28(화)
+/***************************************************************
+	제약사항(Constraints) : 데이터 무결성 원칙을 적용하기 위한 규칙
+    - Unique 제약사항 : 중복을 방지하는 제약
+    - Not Null 제약사항 : null값을 허용하지 않는 제약
+    - Primary 제약사항 : Unique + Not null, Auto-increment 함께 사용
+    - Foreign 제약사항 : 타 테이블의 기본키를 참조하는 제약, 기본키와 참조하는 컬럼은 데이터타입이 동일해야함
+    - Default 제약사항 : 데이터 입력 시 기본으로 저장되는 데이터를 정의하는 제약
+    ** 제약사항은 테이블 생성시, 테이블 수정시 정의함
+**************************************************************/  
+use hrdb2019;
+select database();
+show tables;
+
+select @@sql_safe_updates; -- 업데이트 모드 확인
+select @@autocommit; 	   -- 트랜잭션 방식 확인
+set sql_safe_updates = 0;
+
+-- 제약사항 확인
+show tables;
+desc employee;
+select * from information_schema.table_constraints
+	where table_schema = 'hrdb2019';
+
+-- emp_const 테이블 생성, 기본키 제약 (primary), 참조키 제약(foregin), notnull
+create table emp_const(
+	emp_id char(4) primary key,
+    emp_name varchar(5) not null,
+    hire_date date,
+    salary int
+);
+show tables;
+select * from information_schema.tables
+	where table_name like 'emp%';
+desc emp_const;
+
+create table emp_const2(
+	emp_id char(4),
+    emp_name varchar(5) not null,
+    hire_date date,
+    salary int
+);
+desc emp_const2;
+
+-- 데이터 insert 작업 시 제약사항 체크함
+insert into emp_const(emp_id, emp_name, hire_date,salary)
+	values('S001','홍길동',curdate(),'1000'); -- 제약이 있기에 추가 생성이 불가능함
+insert into emp_const2(emp_id, emp_name, hire_date,salary)
+	values('S001','홍길동',curdate(),'1000'); -- primary의 제약이 없기 때문에 동일한 컬럼이 추가 생성 가능
+    
+insert into emp_const(emp_id, emp_name)
+	values('S002', '스미스');
+insert into emp_const2(emp_id, emp_name)
+	values('S002', '스미스');
+    
+select * from emp_const;
+select * from emp_const2;
+create table emp_const3 (
+	emp_id char(4),
+    emp_name varchar(5) not null,
+    hire_date date,
+    salary int,
+    constraint pk_emp_const3_emp_id primary key(emp_id)
+);
+desc emp_const3; -- 여기서는 확인이 불가능
+select * from information_schema.table_constraints
+	where table_schema = 'hrdb2019';
+select * from information_schema.table_constraints
+	where table_name = 'emp_const3';
+
+
+
+
+
+
+
+
